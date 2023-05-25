@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+df = pd.read_csv("train.csv")
+df
+
+
+f.isnull().sum()
+
+df.describe()
+
+df.info
+
+df.shape
+
+# Convert non-missing values of "Age" column to int
+df['Age'] = df['Age'].fillna(-1).astype(int)
+
+# Replace the missing values (-1) with NaN
+df['Age'] = df['Age'].replace(-1, np.nan)
+df.dtypes
+
+
+# Summarize variable types
+variable_types = df.dtypes
+print(variable_types)
+
+# If needed, apply proper type conversions
+df['Survived'] = df['Survived'].astype('category')
+df['Pclass'] = df['Pclass'].astype('category')
+df['Sex'] = df['Sex'].astype('category')
+df['Embarked'] = df['Embarked'].astype('category')

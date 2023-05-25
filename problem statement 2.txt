@@ -1,0 +1,81 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create a sample dataset
+data = {
+    'Student_ID': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    'Age': [20, 19, 21, 18, 22, np.nan, 23, 20, 19, 20],
+    'Gender': ['M', 'F', 'M', 'F', 'F', 'M', 'M', 'F', 'M', 'F'],
+    'GPA': [3.5, 4.0, 3.2, 3.8, 2.9, 3.7, 4.2, 3.6, np.nan, 3.9],
+    'Attendance': [85, 92, 78, 95, 88, 90, 94, 87, 80, np.nan]
+}
+
+
+allDf=pd.DataFrame (data)
+allDf.to_csv ("StudentPerformance.csv")
+df=pd.read_csv ("StudentPerformance.csv")
+print (df)
+
+df.shape
+
+print((df.isnull().sum()))
+
+df.dropna (inplace=True)
+print (df.isnull().sum())
+
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv('StudentPerformance.csv')
+print (df)
+
+df ["Age"]= df ["Age"].replace(np. NaN,df["Age"].mean())
+print (df ["Age"][:10])
+
+
+df ["GPA"]= df ["GPA"].replace(np. NaN,df["GPA"].median())
+print (df ["GPA"][:10])
+
+df ["Attendance"]= df ["Attendance"].replace(np. NaN,df["Attendance"].mean())
+print (df ["Attendance"][:10])
+
+
+########
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.boxplot(x=df['GPA'])
+plt.show()
+
+sns.boxplot(x=df['Attendance'])
+plt.show()
+
+sns.boxplot(x=df['Age'])
+plt.show()
+
+
+import scipy.stats as stats
+mean=df['GPA'].mean()
+std=df['GPA'].std()
+zscores=stats.zscore(df['GPA'])
+print(zscores)
+
+threshold = 1
+mean=df['GPA'].mean()
+std=df['GPA'].std()
+outlier = []
+for i in df['GPA']:
+  z = (i-mean)/std
+  if z > threshold: 
+    outlier.append(i)
+print('outlier in dataset is', outlier)
+
+
+import matplotlib.pyplot as plt
+df['GPA'].plot(kind = 'hist')
+df['log_math'] = np.log10(df['GPA'])
+df['log_math'].plot(kind = 'hist')
+
+
